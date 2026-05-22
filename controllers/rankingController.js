@@ -1,18 +1,15 @@
 const db = require("../config/db");
 exports.obtenerRanking = (req, res) => {
-  db.query(
-    "SELECT username, highscore FROM users ORDER BY highscore DESC LIMIT 20",
-    (err, results) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({
-          error: "Error al obtener el ranking",
-        });
-      }
-      res.json(results);
-    },
-  );
-};
+  try {
+    const [results] = await db.query (
+      "SELECT username, highscore FROM users ORDER BY highscore DESC LIMIT 20"
+    )
+    res.json(results)
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ error: "Error al obtener el ranking" })
+    }
+  }
 
 exports.guardarPuntuacion = (req, res) => {
   const { puntuacion } = req.body;
