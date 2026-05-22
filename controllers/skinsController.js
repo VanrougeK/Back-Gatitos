@@ -3,7 +3,7 @@ const db = require("../config/db");
 const obtenerSkins = async (req, res) => {
   try {
     const [results] = await db.query (
-      `SELECT id, nombre, nombre, pts_req FROM skins`
+      `SELECT id, nombre, archivo, pts_req FROM skins`
     )
     res.json(results)
   } catch (err) {
