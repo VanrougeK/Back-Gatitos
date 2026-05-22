@@ -1,5 +1,5 @@
 const db = require("../config/db");
-exports.obtenerRanking = (req, res) => {
+exports.obtenerRanking = async (req, res) => {
   try {
     const [results] = await db.query (
       "SELECT username, highscore FROM users ORDER BY highscore DESC LIMIT 20"
@@ -11,7 +11,7 @@ exports.obtenerRanking = (req, res) => {
     }
   }
 
-exports.guardarPuntuacion = (req, res) => {
+exports.guardarPuntuacion = async (req, res) => {
   const { puntuacion } = req.body;
   const userId = req.user?.id
   console.log(req.body, "userId", userId)
