@@ -6,10 +6,13 @@ const db = mysql.createPool({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT || 11933,
   waitForConnections: true,
-  connectionLimit: 5,
+  connectionLimit: 10,
   queueLimit: 0,
+  connectTimeout: 5000,
   ssl: {rejectUnauthorized: false}
 });
+
+console.log("Intentando conectar a:", process.env.DB_HOST);
 
 db.getConnection((err, connection) => {
   if (err) {
