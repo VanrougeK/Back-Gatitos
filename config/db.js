@@ -8,6 +8,7 @@ const db = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 5,
   queueLimit: 0,
+  ssl: {rejectUnauthorized: false}
 });
 
 db.getConnection((err, connection) => {
@@ -18,4 +19,4 @@ db.getConnection((err, connection) => {
     connection.release();
   }
 });
-module.exports = db;
+module.exports = db.promise;
